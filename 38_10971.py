@@ -1,45 +1,37 @@
-size = int(input())
+import sys
+import time
+
+size = int(sys.stdin.readline())
 
 a = [[0]*size]*size
 
 for idx in range(size):
-  a[idx] = list(map(int, input().split()))
-  
-result = []
+  a[idx] = list(map(int, sys.stdin.readline().split()))
 
-def calc(cost):
-  global result
-  
-  rcost = 0
-  
-  for idx in range(size - 1):
-    rcost += a[cost[idx]][cost[idx+1]]
-    
-  rcost += a[cost[len(cost) - 1]][cost[0]]
-  result.append(rcost)
+result = sys.maxsize
 
-def recur(visited, cost, count):
-  global result
-  
-  if count == size:
-    calc(cost)
+def recur(start, cur, visited, cost):
+  if start == cur and sum(visited) == len(visited):
+    print(start, cur, visited)
+    global result
+    result = min(result, cost)
     return
   for i in range(size):
-    if visited[i] == 0:
+    if visited[i] == 0 and a[cur][i] != 0:
       visited[i] = 1
-      cost.append(i)
-      recur(visited, cost, count+1)
+      print(cur, i)
+      time.sleep(2)
+      recur(start, i, visited, cost+a[cur][i])
+      print("pop:", i)
       visited[i] = 0
-      cost.pop()
-      
+
 def solution():
   global result
   
   visited = [0] * size
-  cost = []
-  count = 0
-  recur(visited, cost, count)
+  cost = 0
+  recur(0, 0, visited, cost)
   
-  print(min(result))
+  print(result)
   
 solution()
