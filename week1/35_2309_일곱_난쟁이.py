@@ -10,9 +10,9 @@ def solution():
   for i in range(0, 8):
     for k in range(1, 9):
       if (sum(llist) - llist[i] - llist[k]) == 100:
-        return i, k
+        llist.remove(llist[i])
+        llist.remove(llist[k-1])
+        return
 
-i, k = solution()
-for idx in range(len(llist)):
-  if idx != i and idx != k:
-    print(llist[idx])
+solution()
+print(*llist, sep="\n")

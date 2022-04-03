@@ -1,5 +1,4 @@
 import sys
-import time
 
 size = int(sys.stdin.readline())
 
@@ -12,17 +11,13 @@ result = sys.maxsize
 
 def recur(start, cur, visited, cost):
   if start == cur and sum(visited) == len(visited):
-    print(start, cur, visited)
     global result
     result = min(result, cost)
     return
   for i in range(size):
     if visited[i] == 0 and a[cur][i] != 0:
       visited[i] = 1
-      print(cur, i)
-      time.sleep(2)
       recur(start, i, visited, cost+a[cur][i])
-      print("pop:", i)
       visited[i] = 0
 
 def solution():
