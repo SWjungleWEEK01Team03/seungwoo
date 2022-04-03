@@ -1,37 +1,33 @@
-result = []
-num = []
+import sys
 
-def recur(cnum, visit, num_list, count, size):
-  global result
-  
+n = int(sys.stdin.readline())
+k = int(sys.stdin.readline())
+
+result = []
+llist = []
+
+for _ in range(n):
+  llist.append(sys.stdin.readline().rstrip())
+
+def recur(visited, cnum, count):
+  global result 
+
   if count == 0:
     result.append(cnum)
-  else:
-    for i in range(0, size):
-      if visit[i] == 0:
-        visit[i] = 1
-        cnum += num[i]
-        count -= 1
-        recur(cnum, visit, num_list, count, size)
-        visit[i] = 0
-        cnum = cnum[0:-len(num[i])]
-        count += 1
+    return
 
-def solve():
-  n = int(input())
-  k = int(input())
-  
-  global result
-  
-  for _ in range(n):
-    num.append(input())
-  
   for i in range(n):
-    visited = [0] * n
-    visited[i] = 1
-    recur(num[i], visited, num, k-1, n)
-  
+    if visited[i] == 0:
+      visited[i] = 1
+      recur(visited, cnum + llist[i], count-1)
+      visited[i] = 0
+
+def solution():
+  global result
+
+  visited = [0] * n
+  recur(visited, "", k)
   result = list(set(result))
   print(len(result))
-  
-solve()
+
+solution()
