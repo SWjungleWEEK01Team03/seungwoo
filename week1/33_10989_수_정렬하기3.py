@@ -9,4 +9,4 @@ for _ in range(N):
 for i in range(1, len(llist)):
   if llist[i] != 0:
     for _ in range(llist[i]):
-      sys.stdin.write(i)
+      print(i)
