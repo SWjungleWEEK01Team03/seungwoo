@@ -7,19 +7,22 @@ num_list = [int(num) for num in input().split()]
 result = []
 num_list.sort()
 
-def recur(length, rs):
-	if length == 0:
-		global result
-		result.append(rs[:-1])
-		return
 
-	for i in range(n):
-		recur(length - 1, rs + str(num_list[i]) + " ")
+def recur(length, rs):
+    if length == 0:
+        global result
+        result.append(rs[:-1])
+        return
+
+    for i in range(n):
+        recur(length - 1, rs + str(num_list[i]) + " ")
+
 
 def solution():
-	global result
-	recur(m, "")
-	result = list(dict.fromkeys(result))
-	print(*result, sep="\n")
+    global result
+    recur(m, "")
+    result = list(dict.fromkeys(result))
+    print(*result, sep="\n")
+
 
 solution()
